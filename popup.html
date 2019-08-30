@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      input {
+        border: 1px solid #cecece;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+      }
+      button {
+        height: 30px;
+        width: 110px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="domain" placeholder="OnlinePBX Domain" value="">
+    </div>
+    <div>
+      <input type="password" id="token" placeholder="OnlinePBX Token" value="">
+    </div>
+    <div>
+      <input type="text" id="uuid" placeholder="UUID" value="">
+    </div>
+
+    <div>
+      <button id="saveBtn">Save</button>
+    </div>
+    <div id="test"></div>
+
+    <div>
+      <button id="connectBtn">Connect</button>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
