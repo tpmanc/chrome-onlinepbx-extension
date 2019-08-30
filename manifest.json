@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "OnlinePBX Calls",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "OnlinePBX extension for make call from context menu!",
   "permissions": ["activeTab", "storage", "contextMenus"],
   "options_page": "options.html",
   "background": {
