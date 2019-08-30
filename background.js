@@ -176,34 +176,40 @@ chrome.storage.sync.get(['isConnected'], function(data) {
     }
 });
 
-chrome.contextMenus.create({
-    id: 'phoneCommand',
-    title: "Позвонить",
-    contexts:["selection"],  // ContextType
-});
-
+// удалить все кроме цифр
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
     if (info.menuItemId == "phoneCommand") {
         if (isConnected == true) {
-            onpbx.command('make_call', {
-                from: uuid,
-                to: info.selectionText
-            }, function (data) {
-                console.log(data);
-            });
+            var phone = info.selectionText.replace(/[^0-9+.]/g, "");
+            if (phone.length == 11 || phone.length == 12) {
+                onpbx.command('make_call', {
+                    from: uuid,
+                    to: info.selectionText
+                }, function (data) {
+                    console.log(data);
+                });
+            } else {
+                alert('Phone not found');
+            }
         } else {
             alert('Disconnected');
         }
     }
 });
 
-// chrome.runtime.onInstalled.addListener(function() {
-//   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-//     chrome.declarativeContent.onPageChanged.addRules([{
-//       conditions: [new chrome.declarativeContent.PageStateMatcher({
-//         pageUrl: {hostEquals: 'developer.chrome.com'},
-//       })],
-//       actions: [new chrome.declarativeContent.ShowPageAction()]
-//     }]);
-//   });
-// });
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.contextMenus.create({
+        id: 'phoneCommand',
+        title: "Позвонить",
+        contexts:["selection"],  // ContextType
+    });
+
+  // chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+  //   chrome.declarativeContent.onPageChanged.addRules([{
+  //     conditions: [new chrome.declarativeContent.PageStateMatcher({
+  //       pageUrl: {hostEquals: 'developer.chrome.com'},
+  //     })],
+  //     actions: [new chrome.declarativeContent.ShowPageAction()]
+  //   }]);
+  // });
+});
